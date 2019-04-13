@@ -1,0 +1,39 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: httpbin
+          uri: lb://httpbin
+          predicates:
+            - Path=/get
+
+service:
+  instances:
+    httpbin:
+      uri: http://localhost:19999
+      health_check_endpoint: /health
+      fallback: http://localhost:29999
+
+logging:
+  level:
+    com:
+      example: DEBUG
+    org:
+      springframework:
+        cloud:
+          gateway:
+            filter:
+              LoadBalancerClientFilter: TRACE
+        web:
+          client:
+            RestTemplate: DEBUG
+server:
+  port: 9999
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /management
+
+
