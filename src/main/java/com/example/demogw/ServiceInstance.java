@@ -62,8 +62,8 @@ public class ServiceInstance extends SimpleDiscoveryProperties.SimpleServiceInst
             this.restTemplate.getForObject(this.healthCheckEndpoint, String.class);
             this.healthy.set(true);
         } catch (RestClientException e) {
-            log.warn("[{}] Health check failed. Fallback to {}: {}", this.getUri(), this.fallback.getUri(), e.getMessage());
             this.healthy.set(false);
+            log.warn("[{}] Health check failed. Fallback to {}: {}", this.getUri(), this.fallback.getUri(), e.getMessage());
         }
     }
 
