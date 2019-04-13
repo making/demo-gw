@@ -2,14 +2,14 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: httpbin
-          uri: lb://httpbin
+        - id: dummy
+          uri: lb://dummy
           predicates:
             - Path=/get
 
 service:
   instances:
-    httpbin:
+    dummy:
       uri: http://localhost:19999
       health_check_endpoint: /health
       fallback: http://localhost:29999
